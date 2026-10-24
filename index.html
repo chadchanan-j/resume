@@ -14,7 +14,6 @@
       --text: #e9f3ec;
       --muted: #aebdb4;
       --lime: #a8e6b8;
-      --lime-soft: rgba(168, 230, 184, .14);
       --line: #2b3a31;
     }
     html { scroll-behavior: smooth; scroll-padding-top: 70px; }
@@ -25,27 +24,37 @@
     .navbar-brand { color: var(--lime); font-weight: 600; }
 
     /* Hero */
-    .hero { background: #000; color: #fff; padding: 110px 0 70px; }
-    .avatar { width: 200px; height: 200px; object-fit: cover; border-radius: 50%;
-      border: 3px solid var(--lime); }
-    .hero h1 { font-weight: 600; margin-top: 1.2rem; }
-    .major { font-style: italic; color: var(--lime); font-size: 1.3rem; }
-    .hero a { color: #fff; text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: 4px; }
-    .hero a:hover { color: var(--lime); }
-    .hero hr { width: 120px; margin: 1.5rem auto; border-top: 3px solid var(--lime); opacity: 1; }
-    .hero .bio { max-width: 620px; margin: 0 auto; font-weight: 300; color: var(--muted); }
+    .hero { background: #000; padding: 110px 0 70px; }
+    .hero .tag { color: var(--lime); font-size: .95rem; margin-bottom: .3rem; }
+    .hero h1 { font-weight: 600; }
+    .major { color: var(--lime); font-size: 1.3rem; }
+    .hero a.pim { color: #fff; text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: 4px; }
+    .hero a.pim:hover { color: var(--lime); }
+    .hero hr { width: 100px; border-top: 3px solid var(--lime); opacity: 1; margin: 1.3rem 0; }
+    .hero .bio { color: var(--muted); font-weight: 300; max-width: 520px; }
+    .btn-lime { background: var(--lime); color: #000; font-weight: 500; border: 0; }
+    .btn-lime:hover { background: #c4f0cf; color: #000; }
+    .btn-line { border: 1px solid var(--lime); color: var(--lime); }
+    .btn-line:hover { background: var(--lime); color: #000; }
+    .avatar { width: 260px; height: 260px; object-fit: cover; border-radius: 50%; border: 3px solid var(--lime); }
 
     /* Sections */
     section { padding: 70px 0; }
     section:nth-of-type(even) { background: var(--bg2); }
-    h2.title { font-weight: 600; color: var(--lime); margin-bottom: .4rem; }
-    .title-line { display: none; }
-    h2.title { margin-bottom: 1.6rem; font-size: 1.6rem; }
-    .item { background: var(--card); border: 1px solid var(--line);
-      border-radius: 4px; padding: 1.2rem; height: 100%; }
+    h2.title { font-weight: 600; color: var(--lime); font-size: 1.6rem; margin-bottom: 1.6rem; }
+    .item { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 1.2rem; height: 100%; }
     .item h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: .3rem; color: #fff; }
     .item p { margin: 0; font-size: .92rem; color: var(--muted); }
-    .item .year { display: block; font-size: .8rem; color: var(--lime); margin-bottom: .3rem; }
+
+    /* Timeline (ol) */
+    ol.timeline { list-style: none; padding: 0; margin: 0 0 0 6px; border-left: 2px solid var(--line); }
+    ol.timeline li { position: relative; padding: 0 0 1.6rem 1.5rem; }
+    ol.timeline li:last-child { padding-bottom: 0; }
+    ol.timeline li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px;
+      border-radius: 50%; background: var(--lime); }
+    ol.timeline .year { color: var(--lime); font-size: .85rem; }
+    ol.timeline h3 { font-size: 1.1rem; font-weight: 600; margin: .1rem 0 .2rem; color: #fff; }
+    ol.timeline p { margin: 0; color: var(--muted); font-size: .93rem; }
 
     /* Contact */
     .contact-list { max-width: 560px; padding-left: 1.4rem; }
@@ -53,13 +62,17 @@
     .contact-list li::marker { color: var(--lime); font-weight: 600; }
     .contact-list a { color: var(--lime); }
     .at-img { width: 20px; height: 20px; vertical-align: -4px; }
-    footer { background: #000; color: var(--muted); text-align: center; padding: 1.2rem; font-size: .85rem; border-top: 1px solid var(--line); }
-    @media (max-width: 575px) { .avatar { width: 160px; height: 160px; } .hero { padding-top: 90px; } }
+    footer { background: #000; color: var(--muted); padding: 1.2rem 0; font-size: .85rem; border-top: 1px solid var(--line); }
+    footer a { color: var(--lime); }
+    @media (max-width: 767px) {
+      .hero { padding-top: 90px; text-align: center; }
+      .hero hr, .hero .bio { margin-left: auto; margin-right: auto; }
+      .avatar { width: 180px; height: 180px; margin-bottom: 1.5rem; }
+    }
   </style>
 </head>
 <body>
 
-<!-- Navbar (Toggle / Hamburger เมื่อจอเล็ก) -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
   <div class="container">
     <a class="navbar-brand" href="#home">My Resume</a>
@@ -72,32 +85,38 @@
         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
         <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-        <li class="nav-item"><a class="nav-link" href="#employment">Employment</a></li>
         <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#employment">Employment</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Home -->
-<header id="home" class="hero text-center">
+<header id="home" class="hero">
   <div class="container">
-    <img src="profile.webp" alt="รูปโปรไฟล์" class="avatar">
-    <h1>ชัชชนันท์ จัดการ</h1>
-    <p class="major mb-1"><em>CAI</em></p>
-    <p class="mb-1">คณะวิศวกรรมศาสตร์</p>
-    <p><a href="http://pim.ac.th" target="_blank" rel="noopener">สถาบันการจัดการปัญญาภิวัฒน์</a></p>
-    <hr>
-    <p class="bio">สวัสดีครับ ผมต้นกล้า เป็นเด็กหนุ่มผู้มีความฝัน ขี้ลืมเป็นที่ 1 แต่ตั้งใจทำงานที่ได้รับเสมอ</p>
+    <div class="row align-items-center flex-column-reverse flex-md-row">
+      <div class="col-md-7">
+        <p class="tag">Resume</p>
+        <h1>ชัชชนันท์ จัดการ</h1>
+        <p class="major mb-1"><em>CAI</em></p>
+        <p class="mb-1">คณะวิศวกรรมศาสตร์</p>
+        <p><a class="pim" href="http://pim.ac.th" target="_blank" rel="noopener">สถาบันการจัดการปัญญาภิวัฒน์</a></p>
+        <hr>
+        <p class="bio">สวัสดีครับ ผมต้นกล้า เป็นเด็กหนุ่มผู้มีความฝัน ขี้ลืมเป็นที่ 1 แต่ตั้งใจทำงานที่ได้รับเสมอ</p>
+        <a href="#contact" class="btn btn-lime me-2">ติดต่อ</a>
+        <a href="#skills" class="btn btn-line">ดูทักษะ</a>
+      </div>
+      <div class="col-md-5 text-center">
+        <img src="profile.webp" alt="รูปโปรไฟล์" class="avatar">
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- About Me -->
 <section id="about">
   <div class="container">
-    <h2 class="title">เกี่ยวกับฉัน (About Me)</h2>
-    <hr class="title-line">
+    <h2 class="title">เกี่ยวกับ (About Me)</h2>
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
       <div class="col"><div class="item"><h3>ชื่อเล่น</h3><p>ต้นกล้า</p></div></div>
       <div class="col"><div class="item"><h3>วันเกิด</h3><p>19 กันยายน 2549</p></div></div>
@@ -107,34 +126,27 @@
   </div>
 </section>
 
-<!-- Education -->
 <section id="education">
   <div class="container">
     <h2 class="title">การศึกษา (Education)</h2>
-    <hr class="title-line">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
-      <div class="col"><div class="item"><span class="year">2567 - ปัจจุบัน</span><h3>ระดับปริญญาตรี</h3><p>สถาบันการจัดการปัญญาภิวัฒน์<br>คณะวิศวกรรมศาสตร์ สาขา CAI</p></div></div>
-      <div class="col"><div class="item"><span class="year">2562 - 2567</span><h3>มัธยมศึกษา</h3><p>โรงเรียนมม.<br>GPA 3.67</p></div></div>
-    </div>
+    <ol class="timeline">
+      <li>
+        <span class="year">2567 - ปัจจุบัน</span>
+        <h3>ระดับปริญญาตรี สาขา CAI</h3>
+        <p>สถาบันการจัดการปัญญาภิวัฒน์ คณะวิศวกรรมศาสตร์</p>
+      </li>
+      <li>
+        <span class="year">2562 - 2567</span>
+        <h3>มัธยมศึกษา</h3>
+        <p>โรงเรียนมม. · GPA 3.67</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-<!-- Employment History -->
-<section id="employment">
-  <div class="container">
-    <h2 class="title">ประสบการณ์ทำงาน (Employment History)</h2>
-    <hr class="title-line">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
-      <div class="col"><div class="item"><span class="year">ปัจจุบัน</span><h3>ยังไม่มีประสบการณ์</h3><p>ตอนนี้ยังไม่เคยทำงานประจำ หวังว่าการฝึกงานครั้งนี้จะได้เรียนรู้จากงานจริง</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- Skills -->
 <section id="skills">
   <div class="container">
     <h2 class="title">ทักษะ (Skills)</h2>
-    <hr class="title-line">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
       <div class="col"><div class="item"><h3>HTML</h3><p>พื้นฐาน</p></div></div>
       <div class="col"><div class="item"><h3>CSS</h3><p>เริ่มต้น</p></div></div>
@@ -144,11 +156,22 @@
   </div>
 </section>
 
-<!-- Contact -->
+<section id="employment">
+  <div class="container">
+    <h2 class="title">ประสบการณ์ทำงาน (Employment History)</h2>
+    <ol class="timeline">
+      <li>
+        <span class="year">ปัจจุบัน</span>
+        <h3>ยังไม่มีประสบการณ์</h3>
+        <p>ตอนนี้ยังไม่เคยทำงานประจำ หวังว่าการฝึกงานครั้งนี้จะได้เรียนรู้จากงานจริง</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
 <section id="contact">
   <div class="container">
-    <h2 class="title">ติดต่อ (Contact)</h2>
-    <hr class="title-line">
+    <h2 class="title">ช่องทางการติดต่อ (Contact)</h2>
     <ol class="contact-list">
       <li>อีเมล: <strong>AsterPim</strong><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23a8e6b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm0 0v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.6 7.2'/%3E%3C/svg%3E" alt="at" class="at-img"><strong>pim.ac.th</strong></li>
       <li>โทรศัพท์: 03-921-1745</li>
@@ -159,7 +182,10 @@
 </section>
 
 <footer>
-  &copy; 2026 ชัชชนันท์ จัดการ
+  <div class="container d-flex justify-content-between">
+    <span>&copy; 2569 ชัชชนันท์ จัดการ</span>
+    <a href="#home">กลับด้านบน ↑</a>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
